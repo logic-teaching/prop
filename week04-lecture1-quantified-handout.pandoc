@@ -1,0 +1,252 @@
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+
+
+<br>
+<br>
+
+Logic, First Course, Winter 2020. Week 4, Lecture 1, Handout.
+
+
+## Predicate logic and atomic statements
+
+
+| $a$  =  "Alyssa"
+| $b$  =  "Bryan"
+| $c$  =  "Christina"
+| $d$  =  "Daisy"
+| $L$  =  "is a lawyer"
+| $M$  =  "is a musician"
+| $H$  =  "likes hockey"
+| $S$  =  "likes soccer"
+
+<br>
+
+The name 'Predicate logic' comes from the idea that things like L,M,H,S are predicates or properties. When paired with objects, they form propositions. This is the way in which predicate logic extends propositional logic.
+
+<br>
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ La/\Mb : Alyssa is a lawyer and Bryan is a musician.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ~Ma/\~Lb : Alyssa is not a musician and Bryan is not a lawyer.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Hc->Hd : If Christina likes hockey then Daisy likes hockey.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Hc\/Sd : Christina likes hockey or Daisy likes soccer.
+~~~
+
+<br>
+
+## Motivating quantifiers
+
+Consider the following three sentences:
+
+<table style="width:33%">
+  <tr>
+    <th>Sentence</th>
+  </tr>
+  <tr>
+    <td>Alyssa is nice.</td>
+  </tr>
+  <tr>
+    <td>Someone is nice.</td>
+  </tr>
+  <tr>
+    <td>Eveyrone is nice.</td>
+  </tr>
+</table>
+
+<br>
+
+<br>
+
+## The quantifiers
+
+Our solution is to translate these as follows, where we follow the key that $Nx= x$ is nice, and $a=$ Alyssa:
+
+<table style="width:100%">
+  <tr>
+    <th>Sentence</th>
+    <th>Translation</th>
+    <th>Typed</th>
+    <th>Pronunciation</th>
+    <th>Colloquial pronunciation</th>
+  </tr>
+  <tr>
+    <td>Alyssa is nice.</td>
+    <td>$Na$</td>
+    <td>`Na`</td>
+    <td>$Na$</td>
+    <td>$a$ has $N$</td>
+  </tr>
+  <tr>
+    <td>Someone is nice.</td>
+    <td>$\exists \; x \; Nx$.</td>
+    <td>`ExNx`</td>
+    <td>There is $x$ such that $Nx$</td>
+    <td>There is $x$ such that $x$ has $N$</td>
+  </tr>
+  <tr>
+    <td>Everyone is nice.</td>
+    <td>$\forall \; x \; Nx$</td>
+    <td>`AxNx`</td>
+    <td>For all $x$ (pause), $Nx$</td>
+    <td>For all $x$ (pause), $x$ has $N$</td>
+  </tr>
+</table>
+
+<br>
+
+In this we use the following symbols:
+
+<table style="width:100%">
+  <tr>
+    <th>Symbol</th>
+    <th>Name</th>
+    <th>Handwritten</th>
+    <th>Typed</th>
+  </tr>
+  <tr>
+    <td>$\exists$</td>
+    <td>existential quantifier</td>
+    <td><video controls width="200" src="https://logic-teaching.github.io/prop/vid/quantifiers-exists-write.mp4"/> </video></td>
+    <td>`E`</td>
+  </tr>
+  <tr>
+    <td>$\forall$</td>
+    <td>universal quantifier</td>
+    <td><video controls width="200" src="https://logic-teaching.github.io/prop/vid/quantifiers-forall-write.mp4"/> </video></td>
+    <td>`A`</td>
+  </tr>
+</table>
+
+
+<br>
+
+
+Here are some examples using the key $Nx= x$ is nice, and $a=$ Alyssa:
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ExNx->AxNx : If someone is nice then everyone is nice.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ~AxNx : Not everyone is nice.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Ax~Nx : Everyone is not nice.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Na->ExNx : If Alyssa is nice then someone is nice.
+~~~
+
+<br>
+
+## Multiple variables
+
+The existential quantifier is a way  of saying that *there is* a solution which makes the corresponding "equation" true. Let's first practice with respect to the following familiar key:
+
+| $a$  =  "Alyssa"
+| $b$  =  "Bryan"
+| $c$  =  "Christina"
+| $d$  =  "Daisy"
+| $L$  =  "is a lawyer"
+| $M$  =  "is a musician"
+| $H$  =  "likes hockey"
+| $S$  =  "likes soccer"
+
+<br>
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (La/\(Ha/\Sb))->Ex(Lx/\Hx) : If Alyssa is a lawyer and Alyssa likes hockey and Bryan likes soccer, then someone is both a lawyer and likes hockey.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ~((La/\(Ha/\Sb))->Ex(Lx/\Sx)) : It is not the case that if Alyssa is a lawyer and Alyssa likes hockey and Bryan likes soccer, then someone is both a lawyer and likes soccer.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (La/\(Ha/\Sb))->(Ex(Lx/\Hx)/\EySy) : If Alyssa is a lawyer and Alyssa likes hockey and Bryan likes soccer, then someone is both a lawyer and likes hockey, and someone likes soccer.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ExLx->(La\/Lb) : If someone is a lawyer, then Alyssa is a lawyer or Bryan is a lawyer.
+ ~~~
+
+ ~~~{.Translate .FOL system="gamutND" submission="none"}
+  (ExLx/\EyMy)->(La/\Md) : If someone is a lawyer and someone is a musician, then Alyssa  is a lawyer and Daisy is a musician.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Ex(Sx/\Mx)->((Sc/\Mc)\/(Sd/\Md)) : If someone likes soccer and is a musician, then Christina likes soccer and Christina is a musician, or Daisy likes soccer and Daisy is a musician.
+~~~
+
+The universal quantifier is usually a way of stating generalizations or laws. It is a way of saying that everyone/everything has to have some property or feature. Let's translate with the following key:
+
+| $a$  =  "Alyssa"
+| $b$  =  "Bryan"
+| $c$  =  "Christina"
+| $d$  =  "Daisy"
+| $C$  =  "is drinking coffee"
+| $T$  =  "is drinking tea"
+| $W$  =  "is wide awake"
+
+<br>
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ Ax(Cx\/Tx)->AxWx : If everyone is drinking coffee or tea, then everyone is wide awake.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (AxCx\/AxTx)->AxWx : If everyone is drinking coffee or everyone is drinking tea, then everyone is wide awake.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (AxCx\/AxTx)->Ax(Cx\/Tx) : Everyone drinking coffee or everyone drinking tea is a sufficient condition for everyone drinking coffee or tea.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ ~(Ax(Cx\/Tx)->(AxCx\/AxTx)) : Everyone drinking coffee or everyone drinking tea is not a sufficient condition for everyone drinking coffee or for everyone drinking tea.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (~Cd/\~Td)/\~(AxCx\/AxTx) : Daisy is not drinking coffee and Christina is not drinking tea, and it is not the case that everyone is drinking coffee or everyone is drinking tea.
+~~~
+
+Here are some examples with multiple universal quantifiers.
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (AxCx/\AyWy)->(Cb/\Wb): If everyone is drinking coffee and everyone is wide awake, then Bryan is drinking coffee and Bryan is wide awake.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (AxWx/\~AyTy)->Cb : If everyone is wide awake and not everyone is drinking tea, then Bryan is drinking coffee.
+~~~
+
+~~~{.Translate .FOL system="gamutND" submission="none"}
+ (~Wd/\~Td)->(~AxWx/\~AyTy) : If Daisy is not wide awake and Daisy is not drinking tea, then not everyone is wide awake and not everyone is drinking tea.
+~~~
+
+<br>
+
+These is a handout written for Logic, First Course, Winter 2020. It is run on the Carnap software, which is an:
